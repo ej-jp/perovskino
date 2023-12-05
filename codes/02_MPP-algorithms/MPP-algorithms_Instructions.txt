@@ -1,0 +1,44 @@
+Procedure to run SOP, SOP-manual, and P&O MPPT Algorithms in the Perovskino.
+
+**Preliminary Steps for First Time Setup:**
+
+1. Execute the MOSFETS-Checker routine to determine appropriate minimal DAC step values and intervals required to bias the MOSFET gate for full open and close state.
+
+2. Calibrate the INA219 breakout device as outlined in the INA219-Calibration procedure.
+
+**Procedure for Running MPP Algorithms:**
+
+1. Upload the corresponding ino file for the desired measurement type (SOP, SOP-manual, or P&O) to the Arduino jig equipped with the Perovskino shield.
+
+2. Attach the solar cell and thermistor as needed.
+
+3. Validate that the DAC step sequence, limits and intervals for the MOSFET from the MOSFETS-Checker routine align with the DAC_lists hardcoded in the ino file. These DAC_lists define the VGATE values tested during the JV stage.
+
+4. The SOP algorithm supports up to 8 types of VGATE scans for the JV stage including BWD, FWD, BWD-FWD, and FWD-BWD, with two different interval resolutions. The variable countermpp obtained from mppcalculation() stores the DAC step yielding maximum power.
+
+5. In contrast, the mppcalculation() in the P&O algorithm performs BWD and FWD voltage scans, with countermpp representing the averaged maximum for each scan.
+
+6. The mppcalculation() function is interchangeable between SOP and P&O algorithms.
+
+7. SOP-manual algorithm is similar to the SOP algorithm but allows manual setting of the countermpp variable using the "echo "0" > optimo-DAC.txt | python send-serial-opt.py" command in the "02_MPP-algorithms/manual-inputs" folder overriding the value obtained from mppcalculation().
+
+**Data Extraction and Storage:**
+
+Utilize the "capture-datos-mpp-temperature.py" Python script in the "02_MPP-algorithms/capture_and_grapher" folder to capture and store the data. Run the script with "python capture-datos-mpp-temperature.py". Verify and modify the serial address of your computer to the Arduino (/dev/ACMX or /dev/USBX) if necessary. The data is displayed in the terminal and stored in the "dataraw" folder. An hourly CSV file is generated to prevent data loss.
+
+**Grapher Utilities:**
+
+Several programs can be utilized to graph the data stored as CSV in the "dataraw" folder. However, it is recommended to use the scripts of the form "grapherX.py."
+
+- **grapher2.py:**
+  This script is advisable for post-measurement analysis. It generates a graph with nine panels displaying key variables from the solar cell, transfer curves, and temperature. The graphs showcase the time evolution of the data, presented with date-time formatting, and include intervals without data.
+
+- **grapher3_rebase.py and grapher3_rebase_wDetector.py:**
+  Scripts of the "grapher3" type, akin to grapher2, but they rebase time to seconds from the initial time, and any gaps in the data are removed. The grapher3_rebase_wDetector.py allows data coming from other solar cell detecting irradiation power during EN-50530 tests (see below).
+
+- **grapher4_alive.py:**
+  Similar to grapher2, this script can run and provide real-time updates during the measurement. The "pause_seconds.txt" file configures the time intervals between graph updates, enhancing monitoring capabilities.
+
+**Other Relevant Information:**
+
+For inquiries regarding a program to conduct EN50530 illumination cycle tests in the LSH-7320 LED-based Oriel Solar Simulator, please contact ejjuarezperez@unizar.es.

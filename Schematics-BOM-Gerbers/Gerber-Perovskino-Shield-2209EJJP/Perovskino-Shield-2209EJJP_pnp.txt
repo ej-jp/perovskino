@@ -1,0 +1,41 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=Perovskino-Shield-2209EJJP
+*Date=13:50:05
+*CreatedBy=Fritzing 0.9.5d.2020-10-21.CD-625
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;;22.8299;-6.4085;0;Bottom;Via6
+2;;;35.9516;-45.9695;0;Bottom;IMG5
+3;;;40.2542;-36.8701;0;Bottom;TXT1
+4;;;31.9988;-44.0558;0;Bottom;TXT1
+5;;;13.6211;-35.2393;0;Bottom;INA219
+6;;;39.9106;-42.0658;0;Bottom;TXT1
+7;;THT;45.9439;-12.5915;180;Bottom;Thermistor
+8;;;30.6613;-31.3828;0;Bottom;TXT1
+9;100nF;100 mil [THT, multilayer];30.4499;-21.6485;90;Bottom;C2
+10;;TO220 [THT];24.3539;-16.5685;90;Bottom;Q3
+11;;;44.4195;-26.7209;-90;Bottom;MCP4725
+12;;;25.3933;-11.5154;0;Bottom;Via8
+13;;;35.5367;-6.39108;0;Bottom;Via7
+14;;;6.33683;-45.7775;0;Bottom;Via1
+15;;THT;30.4499;-33.0785;180;Bottom;R5
+16;;THT;31.7199;-10.2185;0;Bottom;R7
+17;;;35.72;-25.0008;90;Bottom;TXT1
+18;;;31.7057;-8.34132;0;Bottom;TXT1
+19;;;3.78588;-45.7775;0;Bottom;Via2
+20;;;11.5475;-7.56392;0;Bottom;IMG5
+21;;;32.4669;-40.75;0;Bottom;IMG5
+22;;;28.3497;-21.6041;90;Bottom;TXT1
+23;;THT;34.2599;-24.1885;-90;Bottom;R6
+24;;;18.9892;-26.7285;0;Bottom;Part1
+25;;;11.3939;-45.7775;0;Bottom;Via3
+26;;THT;47.2139;-40.5315;180;Bottom;Solar Cell

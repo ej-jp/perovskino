@@ -1,0 +1,16 @@
+Procedure for INA219 Calibration (Voltage and Current Measurement):
+
+1. Assemble the complete Perovskino jig and connect a Silicon cell or other stable cell.
+2. Position the multimeter appropriately with respect to the solar cell for either voltage (parallel) or current (series) calibration measurements.
+3. Employ the Arduino Integrated Development Environment (IDE) to upload the file "INA219-calibration-ino.ino" in the Perovskino. Modify this file based on the voltage or current calibration requirements assuring that correcV and correcI parameters are 0 and 1, respectively
+
+4. Initiate data acquisition by executing the "capture-datos-INA219_calibration.py" script.
+5. Data visualization can be performed using scripts of the "grapher" type.
+
+6. For current calibration, set the MCP4725 to a voltage higher than the threshold voltage of the MOSFET to induce a short circuit condition in the solar cell.
+7. Adjust irradiation levels while recording the current values from both the multimeter and INA219.
+8. Calculate the correct current parameter (correcI) as the slope derived from linearly fitting the multimeter and INA219 data. Refer to the "calc INA219_calibration.ods" file for an example.
+
+9. For voltage calibration, configure the MCP4725 to a voltage below the threshold voltage of the MOSFET to achieve an open circuit condition in the solar cell.
+10. Vary irradiation while noting the voltage values from both the multimeter and INA219.
+11. Determine the correct voltage parameter (correcV) as the ordinate at the origin from linearly fitting the multimeter and INA219 data, using a line equation with a slope of 1. Refer to the "calc INA219_calibration.ods" file for an example.
