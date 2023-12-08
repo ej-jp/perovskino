@@ -2,7 +2,7 @@
 version=0.4
 name=Perovskino-Manual
 interwiki=
-home=
+home=quick user guide
 icon=
 document_root=
 short_links=False
@@ -12,4 +12,7 @@ disable_trash=False
 default_file_format=zim-wiki
 default_file_extension=.txt
 notebook_layout=files
+
+[SpellPlugin]
+language=en
 
