@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2023-12-08T12:43:10+01:00
+
+====== pagina test ======
+Creado viernes 08 diciembre 2023
+

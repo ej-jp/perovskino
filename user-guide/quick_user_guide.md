@@ -1,0 +1,21 @@
+# quick user guide
+perovskino is a work in progress, please be patient.
+
+
+
+1. install python 3x (recommended anaconda) and dependencies (pandas, matplotlib, pyserial) on your computer
+2. plug perovskino to the usb of the computer
+3. find the address/port assigned to the perovskino (on linux, most probably /dev/ttyUSB0) and modify the ~/codes/02_MPP-algorithms/capture_and_grapher file accordingly
+4. in the ~/codes/02_MPP-algorithms/capture_and_grapher folder run "python capture-data-mpp-temperature.py".
+5. The serial data is displayed on the terminal and is also stored inside the dataraw folder as csv files named date-time.csv.
+6. use your favorite graphing program or grapherX.py scripts.  
+
+
+
+
+
+
+
+tips: an easy way to find the serial address of the arduino on the computer is to install the Arduino IDE (which you will use to reprogram the arduino) and check tools/port.
+
+
