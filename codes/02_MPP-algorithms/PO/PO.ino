@@ -5,6 +5,9 @@
 //#include <LTR390.h>
 //#include <DHT.h>
 
+const char *arduinoID = "ARDUINO123";
+
+
 //Solar cell testing
 Adafruit_MCP4725 dac;
 Adafruit_INA219 ina219(0x40);
@@ -44,7 +47,7 @@ const float correcV = 27.38;
 //settings for PO-MPP algorithm search
 const int n_average = 60; //30; number of averaged measurements per data point; beta parameter
 const int steps = 10;     //5; number of averaged data points constituting a k-step; delta parameter; 10 steps of MPP run ~2 seconds
-const int stepcounter = 10;//2;  steps increment; epsilon parameter
+const int stepcounter = 2;//2;  steps increment; epsilon parameter
 
 //Definition of the optimal DAC integer (VGATE)
 int countermpp;
@@ -79,6 +82,9 @@ void setup() {
   ina219.setCalibration_16V_400mA();
 
   startMillis = millis();
+  
+    // sending arduino ID
+  Serial.println(arduinoID);
 }
 
 void loop() {

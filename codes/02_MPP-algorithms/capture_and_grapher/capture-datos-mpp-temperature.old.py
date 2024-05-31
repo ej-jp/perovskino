@@ -1,5 +1,4 @@
 import serial, time
-#import pandas as pd
 import csv
 from datetime import datetime
 
@@ -9,7 +8,6 @@ from datetime import datetime
 portpc = '/dev/ttyUSB0'
 
 folderdata = 'dataraw/'
-
 baudios = 9600
 
 arduino = serial.Serial(portpc, baudios, timeout=5, write_timeout=1)

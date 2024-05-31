@@ -1,52 +1,66 @@
 import serial, time
-#import pandas as pd
+import serial.tools.list_ports
 import csv
 from datetime import datetime
-
-
-#portpc = '/dev/ttyACM0'
-portpc = '/dev/ttyACM1'
-#portpc = '/dev/ttyUSB0'
+import re
 
 folderdata = 'dataraw/'
-
 baudios = 9600
 
-arduino = serial.Serial(portpc, baudios, timeout=5, write_timeout=1)
-arduino.flushInput()
-
-
-
-############info recolectada para limpiar el flush
-#abrir y cerrar despues de instanciar
-arduino.dtr=True
-arduino.close()
-arduino.open() 
-time.sleep(2)
-# arduino.flush()
-
-
-
-#print("Connected to Arduino port: " + portpc)
-
-while True:
-    t = time.localtime()
-    decoded_time_for_filename = time.strftime('%Y-%m-%d_%H', t)
-    fileName =folderdata + decoded_time_for_filename + ".csv"
-    file = open(fileName, "a")
-    
-    filadatos = arduino.readline().decode().strip()
-
-
-    tt = datetime.now()
-    decoded_time = tt.strftime('%Y-%m-%d %H:%M:%S.%f')
+def find_arduino_port(arduino_id, max_attempts=5):
+    #get all ports 
+    ports = serial.tools.list_ports.comports()
+    # Imprimir todos los puertos detectados para depuración
+    print("Puertos detectados:")
+    for port in ports:
+        print(port.device)
+    # Filtering only to match /dev/ACMX or /dev/USBX
+    pattern = re.compile(r'/dev/(ttyACM|ttyUSB)\d+')
+    filtered_ports = [port.device for port in ports if pattern.match(port.device)]
+    print("Puertos Filtered:")
+    print(filtered_ports)
     
     
-    print(decoded_time,"\t",filadatos)
-    
-    with open(fileName, "a", newline='') as f:
-        writer = csv.writer(f, delimiter = "\t",escapechar="\t", quoting=csv.QUOTE_NONE)
-        #writerow with seperate sensorValue
-        writer.writerow([decoded_time, filadatos])
-        f.close()
-        
+    for port in filtered_ports:
+        try:
+            ser = serial.Serial(port, baudios, timeout=1)
+            time.sleep(2)  # Espera para que la conexión serial se establezca
+            for _ in range(max_attempts):
+                line = ser.readline().decode(errors='ignore').strip()
+                if arduino_id in line:
+                    ser.close()
+                    return port
+            ser.close()
+        except serial.SerialException:
+            pass
+    return None
+
+# Arduino ID
+expected_arduino_id = "ARDUINO123"
+
+#finding the dev
+arduino_port = find_arduino_port(expected_arduino_id)
+
+if arduino_port:
+    print(f"Arduino found in {arduino_port}")
+    # Open serial
+    with serial.Serial(arduino_port, baudios, timeout=1) as arduino:
+        arduino.readline() #ignore first line containing empty data
+        arduino.readline() #ignore second line containing the id
+        while True:
+            t = datetime.now()
+            decoded_time_for_filename = t.strftime('%Y-%m-%d_%H')
+            decoded_time_for_dataline = t.strftime('%Y-%m-%d %H:%M:%S.%f')
+            fileName = folderdata + decoded_time_for_filename + ".csv"
+
+            # reading full line
+            line = arduino.readline().decode().strip()
+
+            # Print and save data into CSV file
+            print(decoded_time_for_dataline, "\t", line)
+            with open(fileName, "a", newline='') as f:
+                writer = csv.writer(f, delimiter="\t", escapechar="\t", quoting=csv.QUOTE_NONE)
+                writer.writerow([decoded_time_for_dataline, line])
+else:
+    print("Arduino not found in port.")
+

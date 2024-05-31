@@ -5,6 +5,9 @@
 //#include <LTR390.h>
 //#include <DHT.h>
 
+const char *arduinoID = "ARDUINO123";
+
+
 //Solar cell testing
 Adafruit_MCP4725 dac;
 Adafruit_INA219 ina219(0x40);
@@ -122,8 +125,11 @@ void setup() {
   ina219.setCalibration_16V_400mA();
 
   startMillis = millis();  // setting starting time before void loop()
-  loopCount = 1;       // setting initial loop id before void loop()
-  
+  loopCount = 5;       // setting initial loop id before void loop()
+
+
+  // sending arduino ID
+  Serial.println(arduinoID);
 }
 
 void loop() {

@@ -42,8 +42,8 @@ df = df[~df.apply(lambda row: row.astype(str).str.contains('Received').any(), ax
 
 
 #solar cell active area
-area = 0.64
-# area = 1.18
+#area = 0.64
+area = 1.18
 # area = 1.0
 df["mpppower"] =  df["mpppower"].astype("float") / area
 df["power"] =  df["power"].astype("float") / area
