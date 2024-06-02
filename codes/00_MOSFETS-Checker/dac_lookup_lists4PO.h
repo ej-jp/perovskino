@@ -1,6 +1,9 @@
 #ifndef DACLOOKUP_H
 #define DACLOOKUP_H
 #include <avr/pgmspace.h>
+const int maxlimitlist = 1950;
+const int minlimitlist = 1500;
+
 // Forward Fast
 const int dac_steps1 = 91;
 const PROGMEM int DACLookup_list1[dac_steps1] = {

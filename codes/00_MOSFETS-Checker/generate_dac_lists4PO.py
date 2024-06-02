@@ -21,6 +21,11 @@ def write_to_file(filename, lookup_lists):
 
     with open(filename, 'w') as f:
         f.write(header_content)
+        # Write master_start and master_end values
+        f.write(f"const int maxlimitlist = {master_start};\n")
+        f.write(f"const int minlimitlist = {master_end};\n\n")
+        
+        
         for i, (key, values) in enumerate(lookup_lists.items(), start=1):
             steps = len(values)
             values_str = ', '.join(map(str, values))
@@ -34,7 +39,7 @@ def write_to_file(filename, lookup_lists):
 if __name__ == "__main__":
     import sys
     if len(sys.argv) != 3:
-        print("Usage: python generate_dac_lists.py <master_start> <master_end>")
+        print("Usage: python generate_dac_lists.py <master_start> <master_end>, start > end")
         sys.exit(1)
 
     master_start = int(sys.argv[1])

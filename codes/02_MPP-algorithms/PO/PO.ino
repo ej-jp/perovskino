@@ -2,7 +2,7 @@
 #include <math.h>
 #include <Adafruit_MCP4725.h>
 #include <Adafruit_INA219.h>
-#include "dac_lookup_lists4SOP.h"
+#include "dac_lookup_lists4PO.h"
 
 //#include <LTR390.h>
 //#include <DHT.h>
@@ -35,9 +35,9 @@ const float correcV = 27.38;
 
 
 //settings for PO-MPP algorithm search
-const int n_average = 60; //30; number of averaged measurements per data point; beta parameter
-const int steps = 10;     //5; number of averaged data points constituting a k-step; delta parameter; 10 steps of MPP run ~2 seconds
-const int stepcounter = 2;//2;  steps increment; epsilon parameter
+const int n_average = 10; //30; number of averaged measurements per data point; beta parameter
+const int steps = 15;     //5; number of averaged data points constituting a k-step; delta parameter; 10 steps of MPP run ~2 seconds
+const int stepcounter = 5;//2;  steps increment; epsilon parameter
 
 //Definition of the optimal DAC integer (VGATE)
 int countermpp;
@@ -289,8 +289,8 @@ int POmpp(int countermpp) {
 
   if (diffpower_avg >= 0.0 && diffvoltg_avg >= 0.0 )   {
     countermpp = countermpp;// if n+1 counter produces large power, set as the new countermpp for the next.
-    if (countermpp >= 1800)   {
-        return countermpp = 1800;//keeps limits
+    if (countermpp >= maxlimitlist)   {
+        return countermpp = maxlimitlist;//keeps limits
     }
     if (diffpower_avg_rcheck < 0.0) {
         return countermpp = countermpp - stepcounter - stepcounter; // if rechecking detects decrease of power, go back.
@@ -300,8 +300,8 @@ int POmpp(int countermpp) {
   
   if (diffpower_avg >= 0.0 && diffvoltg_avg < 0.0 )   {
     countermpp = countermpp;// if n+1 counter produces large power, set as the new countermpp for the next.
-    if (countermpp >= 1800)   {
-        return countermpp = 1800;//keeps limits
+    if (countermpp >= maxlimitlist)   {
+        return countermpp = maxlimitlist;//keeps limits
     }
     if (diffpower_avg_rcheck < 0.0) {
         return countermpp = countermpp - stepcounter - stepcounter; // if rechecking detects decrease of power, go back.
@@ -311,8 +311,8 @@ int POmpp(int countermpp) {
  
   if (diffpower_avg < 0.0 && diffvoltg_avg >= 0.0 )   {
     countermpp = countermpp - stepcounter - stepcounter;// if n+1 counter produces lower power, countermpp backs to n-1.
-    if (countermpp <= 1200)   {
-        return countermpp = 1200;//keeps limits
+    if (countermpp <= minlimitlist)   {
+        return countermpp = minlimitlist;//keeps limits
     }
     if (diffpower_avg_rcheck > 0.0) {
         return countermpp = countermpp + stepcounter + stepcounter; // if rechecking detects increase of power, go ahead.
@@ -322,8 +322,8 @@ int POmpp(int countermpp) {
   
   if (diffpower_avg < 0.0 && diffvoltg_avg < 0.0 )   {
     countermpp = countermpp - stepcounter - stepcounter;// if n+1 counter produces lower power, countermpp backs to n-1.
-    if (countermpp <= 1200)   {
-        return countermpp = 1200;//keeps limits
+    if (countermpp <= minlimitlist)   {
+        return countermpp = minlimitlist;//keeps limits
     }
     if (diffpower_avg_rcheck > 0.0) {
         return countermpp = countermpp + stepcounter + stepcounter; // if rechecking detects increase of power, go ahead.
