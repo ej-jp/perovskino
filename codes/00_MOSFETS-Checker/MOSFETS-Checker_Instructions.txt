@@ -1,8 +1,16 @@
 MOSFET Checker Procedure:
 
-1. Construct the circuit according to the schematic presented in scheme.jpg.
+To verify that selected MOSFET works ok 
+1. Construct the circuit according to the schematic presented in scheme.jpg or use a illuminated Si-cell.
 2. Utilize the Arduino IDE to upload the file mosfet-checker-ino/mosfet-checker-ino.ino.
 3. Connect the MOSFET for evaluation.
-4. Apply approximately 5 V to power the circuit.
+4. Apply approximately 5 V to power the circuit or illuminate the cell under 1 Sun.
 5. Commence data acquisition by executing capture_and_grapher/capture-datos.py. Edit the script to reflect the correct serial USB port on the computer assigned to the perovskite jig, if needed.
 6. Generate graphs based on the collected data using capture_and_grapher/grapher2.py.
+7. Repeat the process using Si-cell under 0.1 Sun to find the correct DAC integer range to be applied in the VGATE.
+
+
+Notes:
+
+Examples of broken ILZN43N MOSFETS can be found dataraw folder.
+A working MOSFET shows a smooth JV curve for Si-cell under 1 Sun without spikes.
