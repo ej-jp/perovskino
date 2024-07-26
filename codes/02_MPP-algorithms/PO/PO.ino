@@ -7,7 +7,7 @@
 //#include <LTR390.h>
 //#include <DHT.h>
 
-const char *arduinoID = "ARDUINO123";
+const char *arduinoID = "boni0002";
 
 
 //Solar cell testing
@@ -35,9 +35,14 @@ const float correcV = 27.38;
 
 
 //settings for PO-MPP algorithm search
-const int n_average = 10; //30; number of averaged measurements per data point; beta parameter
+const int n_average =30; //30; number of averaged measurements per data point; beta parameter
 const int steps = 15;     //5; number of averaged data points constituting a k-step; delta parameter; 10 steps of MPP run ~2 seconds
-const int stepcounter = 5;//2;  steps increment; epsilon parameter
+const int stepcounter = 1;//2;  steps increment; epsilon parameter
+
+//settings for PO-MPP algorithm search. Si-cell stable 38 min
+//const int n_average =30; //30; number of averaged measurements per data point; beta parameter
+//const int steps = 15;     //5; number of averaged data points constituting a k-step; delta parameter; 10 steps of MPP run ~2 seconds
+//const int stepcounter = 1;//2;  steps increment; epsilon parameter
 
 //Definition of the optimal DAC integer (VGATE)
 int countermpp;
@@ -74,7 +79,11 @@ void setup() {
   startMillis = millis();
   
     // sending arduino ID
-  Serial.println(arduinoID);
+  //Serial.println(arduinoID);
+  //Serial.println(arduinoID);
+  //Serial.println(arduinoID);
+  //Serial.println(arduinoID);
+
 }
 
 void loop() {
@@ -152,6 +161,7 @@ int POmpp(int countermpp) {
 
 
     //serial output
+    Serial.print(arduinoID); Serial.print("\t");
     Serial.print("MPP"); Serial.print("\t");
     Serial.print(countermpp); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");
@@ -208,6 +218,7 @@ int POmpp(int countermpp) {
 
 
     //serial output
+    Serial.print(arduinoID); Serial.print("\t");
     Serial.print("MPP"); Serial.print("\t");
     Serial.print(countermpp); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");
@@ -265,6 +276,7 @@ int POmpp(int countermpp) {
 
 
     //serial output
+    Serial.print(arduinoID); Serial.print("\t");
     Serial.print("MPP"); Serial.print("\t");
     Serial.print(countermpp); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");
@@ -384,6 +396,7 @@ int mppcalculation() { // JV loop with initial MPP determination
 
 
     //serial output
+    Serial.print(arduinoID); Serial.print("\t");
     Serial.print("JV"); Serial.print("\t");
     Serial.print(counter); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");
@@ -441,6 +454,7 @@ int mppcalculation() { // JV loop with initial MPP determination
 
 
     //serial output
+    Serial.print(arduinoID); Serial.print("\t");
     Serial.print("JV"); Serial.print("\t");
     Serial.print(counter); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");

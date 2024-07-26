@@ -8,7 +8,6 @@ import matplotlib.ticker as ticker
 from matplotlib.dates import DateFormatter
 import time
 from scipy import integrate
-import ftplib
 from matplotlib.offsetbox import OffsetImage
 
 
@@ -20,11 +19,9 @@ all_files = glob.glob(os.path.join(path, "*.csv"))
 all_files=sorted(all_files) 
 
 
-df = pd.concat((pd.read_csv(f, header=None, sep='\t', on_bad_lines='skip',names = ["time", "type", "notvalid1", "integer4725", "notvalid2","volt4725","notvalid3","voltage","notvalid4","current","notvalid5","power","notvalid6","integermpp4725","notvalid7","mpppower","notvalid8","temperature"]) for f in all_files))
-#on_bad_lines='skip', remove it for special pandas in crouton.
+df = pd.concat((pd.read_csv(f, header=None, sep='\t',on_bad_lines='skip',names = ["time", "id", "notvalid9","type", "notvalid1", "integer4725", "notvalid2","volt4725","notvalid3","voltage","notvalid4","current","notvalid5","power","notvalid6","integermpp4725","notvalid7","mpppower","notvalid8","temperature"]) for f in all_files))
 
-# upload from df.to csv, comma separator, remove header.
-#df = pd.concat((pd.read_csv(f, header=None, sep=',', on_bad_lines='skip',names = ["time", "type", "notvalid1", "integer4725", "notvalid2","volt4725","notvalid3","voltage","notvalid4","current","notvalid5","power","notvalid6","integermpp4725","notvalid7","mpppower","notvalid8","temperature"]) for f in all_files))
+
 
 df["time"] =  pd.to_datetime(df["time"], errors='coerce')
 df = df.drop(df[df['type'] == 'start'].index)
@@ -57,9 +54,8 @@ df = df.set_index(df["time"])
 
 df = df[~df.apply(lambda row: row.astype(str).str.contains('Received').any(), axis=1)]
 
-#print(df)
 
-#df.to_csv('Outputgrapher3.csv')#, index = False)
+
 
 
 

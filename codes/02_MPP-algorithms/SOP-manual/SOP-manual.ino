@@ -3,7 +3,6 @@
 #include <Adafruit_MCP4725.h>
 #include <Adafruit_INA219.h>
 #include "dac_lookup_lists4SOP.h"
-
 //#include <LTR390.h>
 //#include <DHT.h>
 
@@ -28,7 +27,6 @@ const int SensorPIN = A0;//voltage readings for thermistor in solar cell testing
 #define  C -3.693E-09
 
 
-
 //ina219 calibration parameters
 const float correcI = 0.84253;
 const float correcV = 27.38;
@@ -45,7 +43,8 @@ int countermpp;
 unsigned long startMillis;
 unsigned long currentMillis;
 
-const unsigned long longperiod = 720000;  //12 min. Portion of time running at MPP condition between MPP search runs.
+//const unsigned long longperiod = 360000;  //6 min. Portion of time running at MPP condition between MPP search runs.
+const unsigned long longperiod = 60000;  //1 min. Portion of time running at MPP condition between MPP search runs.
 const unsigned long shortperiod = 3000; // below this time the system is just starting
 
 int loopCount; //global definition of this counter
@@ -73,10 +72,10 @@ void setup() {
 
   startMillis = millis();  // setting starting time before void loop()
   loopCount = 1;       // setting initial loop id before void loop()
-  
-  
-    // sending arduino ID
-  Serial.println(arduinoID);
+
+
+  // sending arduino ID
+  //Serial.println(arduinoID);
 }
 
 void loop() {
@@ -165,6 +164,7 @@ void SOPmpp(int countermpp, int optvalue) {
 
 
     //serial output
+    Serial.print(arduinoID); Serial.print("\t");
     Serial.print("MPP"); Serial.print("\t");
     Serial.print(countermpp); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");
@@ -252,6 +252,7 @@ int mppcalculation(int listNumber) {
 
 
     //serial output
+    Serial.print(arduinoID); Serial.print("\t");
     Serial.print("JV"); Serial.print("\t");
     Serial.print(counter); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");
