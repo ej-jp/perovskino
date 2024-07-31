@@ -7,7 +7,7 @@
 //#include <LTR390.h>
 //#include <DHT.h>
 
-const char *arduinoID = "boni0002";
+const char *arduinoID = "exampleID";
 
 
 //Solar cell testing
@@ -78,7 +78,7 @@ void setup() {
 
   startMillis = millis();
   
-    // sending arduino ID
+  // sending arduino ID
   //Serial.println(arduinoID);
   //Serial.println(arduinoID);
   //Serial.println(arduinoID);
@@ -161,7 +161,7 @@ int POmpp(int countermpp) {
 
 
     //serial output
-    Serial.print(arduinoID); Serial.print("\t");
+    //Serial.print(arduinoID); Serial.print("\t");
     Serial.print("MPP"); Serial.print("\t");
     Serial.print(countermpp); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");
@@ -218,7 +218,7 @@ int POmpp(int countermpp) {
 
 
     //serial output
-    Serial.print(arduinoID); Serial.print("\t");
+    //Serial.print(arduinoID); Serial.print("\t");
     Serial.print("MPP"); Serial.print("\t");
     Serial.print(countermpp); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");
@@ -276,7 +276,7 @@ int POmpp(int countermpp) {
 
 
     //serial output
-    Serial.print(arduinoID); Serial.print("\t");
+    //Serial.print(arduinoID); Serial.print("\t");
     Serial.print("MPP"); Serial.print("\t");
     Serial.print(countermpp); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");
@@ -396,7 +396,7 @@ int mppcalculation() { // JV loop with initial MPP determination
 
 
     //serial output
-    Serial.print(arduinoID); Serial.print("\t");
+    //Serial.print(arduinoID); Serial.print("\t");
     Serial.print("JV"); Serial.print("\t");
     Serial.print(counter); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");
@@ -454,7 +454,7 @@ int mppcalculation() { // JV loop with initial MPP determination
 
 
     //serial output
-    Serial.print(arduinoID); Serial.print("\t");
+    //Serial.print(arduinoID); Serial.print("\t");
     Serial.print("JV"); Serial.print("\t");
     Serial.print(counter); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");

@@ -18,6 +18,8 @@ df["time"] =  pd.to_datetime(df["time"], errors='coerce')
 df = df.dropna(subset=["time"])
 df = df.set_index(df["time"])
 
+df = df[~df.apply(lambda row: row.astype(str).str.contains('inf').any(), axis=1)]
+df = df[~df.apply(lambda row: row.astype(str).str.contains('ovf').any(), axis=1)]
 
 df["Rds"] =  1.0 / df["Rds"].astype("float")
 

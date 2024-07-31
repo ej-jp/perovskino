@@ -19,7 +19,7 @@ all_files = glob.glob(os.path.join(path, "*.csv"))
 all_files=sorted(all_files) 
 
 
-df = pd.concat((pd.read_csv(f, header=None, sep='\t',on_bad_lines='skip',names = ["time", "id", "notvalid9","type", "notvalid1", "integer4725", "notvalid2","volt4725","notvalid3","voltage","notvalid4","current","notvalid5","power","notvalid6","integermpp4725","notvalid7","mpppower","notvalid8","temperature"]) for f in all_files))
+df = pd.concat((pd.read_csv(f, header=None, sep='\t', on_bad_lines='skip',names = ["time", "type", "notvalid1", "integer4725", "notvalid2","volt4725","notvalid3","voltage","notvalid4","current","notvalid5","power","notvalid6","integermpp4725","notvalid7","mpppower","notvalid8","temperature"]) for f in all_files))
 
 
 
@@ -59,8 +59,8 @@ df = df[~df.apply(lambda row: row.astype(str).str.contains('Received').any(), ax
 
 #solar cell active area
 #area = 0.64
-area = 1.18
-# area = 1.0
+#area = 1.18
+area = 1.0
 df["mpppower"] =  df["mpppower"].astype("float") / area
 df["power"] =  df["power"].astype("float") / area
 df["current"] =  df["current"].astype("float") / area

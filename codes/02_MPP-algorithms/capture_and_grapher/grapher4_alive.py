@@ -19,7 +19,7 @@ def update_graph():
         all_files=sorted(all_files) 
         
         
-        df = pd.concat((pd.read_csv(f, header=None, sep='\t',names = ["time", "id", "notvalid9","type", "notvalid1", "integer4725", "notvalid2","volt4725","notvalid3","voltage","notvalid4","current","notvalid5","power","notvalid6","integermpp4725","notvalid7","mpppower","notvalid8","temperature"]) for f in all_files))
+        df = pd.concat((pd.read_csv(f, header=None, sep='\t',names = ["time", "type", "notvalid1", "integer4725", "notvalid2","volt4725","notvalid3","voltage","notvalid4","current","notvalid5","power","notvalid6","integermpp4725","notvalid7","mpppower","notvalid8","temperature"]) for f in all_files))
         #on_bad_lines='skip' quitado para version pandas de crouton
         
         
@@ -36,8 +36,8 @@ def update_graph():
         
         #solar cell active area
         #area = 0.64
-        area = 1.18
-        # area = 1.0
+        #area = 1.18
+        area = 1.0
         df["mpppower"] =  df["mpppower"].astype("float") / area
         df["power"] =  df["power"].astype("float") / area
         df["current"] =  df["current"].astype("float") / area

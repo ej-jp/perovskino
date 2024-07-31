@@ -170,7 +170,7 @@ void SOPmpp(int countermpp) {
 
 
     //serial output
-    Serial.print(arduinoID); Serial.print("\t");
+    //Serial.print(arduinoID); Serial.print("\t");
     Serial.print("MPP"); Serial.print("\t");
     Serial.print(countermpp); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");
@@ -287,7 +287,7 @@ int mppcalculation(int listNumber) {
 
 
     //serial output
-    Serial.print(arduinoID); Serial.print("\t");
+    //Serial.print(arduinoID); Serial.print("\t");
     Serial.print("JV"); Serial.print("\t");
     Serial.print(counter); Serial.print("\t");
     Serial.print(voltageapplied); Serial.print("\t");

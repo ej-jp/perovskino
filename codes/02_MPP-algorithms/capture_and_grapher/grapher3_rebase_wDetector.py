@@ -19,7 +19,7 @@ all_files = glob.glob(os.path.join(path, "*.csv"))
 all_files=sorted(all_files) 
 
 
-df = pd.concat((pd.read_csv(f, header=None, sep='\t',on_bad_lines='skip',names = ["time", "id", "notvalid9","type", "notvalid1", "integer4725", "notvalid2","volt4725","notvalid3","voltage","notvalid4","current","notvalid5","power","notvalid6","integermpp4725","notvalid7","mpppower","notvalid8","temperature"]) for f in all_files))
+df = pd.concat((pd.read_csv(f, header=None, sep='\t', on_bad_lines='skip',names = ["time", "type", "notvalid1", "integer4725", "notvalid2","volt4725","notvalid3","voltage","notvalid4","current","notvalid5","power","notvalid6","integermpp4725","notvalid7","mpppower","notvalid8","temperature"]) for f in all_files))
 
 
 
